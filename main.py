@@ -1,19 +1,23 @@
 import re
 from urllib import request
 import yt_dlp
-import requests
+import ujson
+from datetime import datetime
 
-
-def dl(url):
-    #print('Getting download url...')
-    #r = requests.get(url) 
-    #print(f'Downloading video: {r.url}')
-    ydl_opts = {
-        'outtmpl': 'downloads/%(extractor)s-%(id)s-%(title)s.%(ext)s',
+def dl(url, path):
+    opts = {
+        'outtmpl': 'downloads/%s /%(extractor)s-%(id)s-%(title)s.%(ext)s'.replace("%s ", path),
         'ignoreerrors': True,
     }
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+    with yt_dlp.YoutubeDL(opts) as ydl:
         ydl.download([url])
 
-#dl("https://www.tiktok.com/@wemijs/video/7069031542881848578?")
-dl("https://www.tiktokv.com/share/video/7069031542881848578/")
+f = open('user_data_fake.json', 'r')
+
+udata = ujson.loads(f.read())
+
+for like in udata['Activity']['Like List']['ItemFavoriteList']:
+    link = like['VideoLink']
+    path = datetime.strptime(like['Date'], '%Y-%m-%d %H:%M:%S').__format__('%Y-%m-%d')
+    
+    dl(link, path)
