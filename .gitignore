@@ -1,2 +1,6 @@
 downloads/*
+user/*
+favorite/*
+liked/*
 user_data.json
+user_data_fake.json
