@@ -38,7 +38,7 @@ def dlUser():
         path = 'user/' + datetime.strptime(vid['Date'], '%Y-%m-%d %H:%M:%S').__format__('%Y-%m-%d')
         
         opts = {
-            'outtmpl': '%s/%(title)s.%(ext)s'.replace("%s ", path),
+            'outtmpl': '%s /%(title)s.%(ext)s'.replace("%s ", path),
             'ignoreerrors': True,
         }
         with yt_dlp.YoutubeDL(opts) as ydl:
