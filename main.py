@@ -27,7 +27,7 @@ def dlLiked():
 
 def dlFav():
     for fav in udata['Activity']['Favorite Videos']['FavoriteVideoList']:
-        link = fav['VideoLink']
+        link = fav['Link']
         path = 'favorite/' + datetime.strptime(fav['Date'], '%Y-%m-%d %H:%M:%S').__format__('%Y-%m-%d')
         
         dl(link, path)
