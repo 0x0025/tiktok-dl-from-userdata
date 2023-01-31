@@ -20,7 +20,7 @@ udata = ujson.loads(f.read())
 
 def dlLiked():
     for like in udata['Activity']['Like List']['ItemFavoriteList']:
-        link = like['VideoLink']
+        link = like['Link']
         path = 'liked/' + datetime.strptime(like['Date'], '%Y-%m-%d %H:%M:%S').__format__('%Y-%m-%d')
         
         dl(link, path)
@@ -34,7 +34,7 @@ def dlFav():
 
 def dlUser():
     for vid in udata['Video']['Videos']['VideoList']:
-        link = vid['VideoLink']
+        link = vid['Link']
         path = 'user/' + datetime.strptime(vid['Date'], '%Y-%m-%d %H:%M:%S').__format__('%Y-%m-%d')
         
         opts = {
